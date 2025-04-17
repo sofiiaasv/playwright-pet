@@ -1,0 +1,19 @@
+{
+  "name": "ts-first-steps",
+  "version": "1.0.0",
+  "description": "playwright tests",
+  "main": "app.js",
+  "scripts": {
+    "test:chrome": "playwright test --config=playwright.config.ts --projects=Chromium",
+    "test:firefox": "playwright test --config=playwright.config.ts --project=Firefox",
+    "test:webkit": "playwright test --config=playwright.config.ts --project=Webkit", 
+    "tests:e2e": "playwright test --config=e2e.config.ts --project=Webkit"
+    
+  },
+  "author": "Sofiia",
+  "license": "ISC",
+  "dependencies": {
+    "@playwright/test": "^1.50.0",
+    "prettier": "^3.4.2"
+  }
+}
