@@ -13,6 +13,17 @@ test("Transfer funds", async ({page}) => {
     await page.click("#transfer_funds_tab")
     await page.selectOption('#tf_fromAccountId', '2')
     await page.selectOption('#tf_toAccountId', '3')
-    await page.fill('#tf_amount', '')
+    await page.fill('#tf_amount', '500')
+    await page.fill('#tf_description', 'test_message')
+    await page.click('#btn_submit')
+
+    const boardHeader = await page.locator('h2.board-header')
+    await expect (boardHeader).toHaveText('Transfer Money & Make Payments - Verify')
+
+    await page.click('#btn_submit')
+
+    const successMessage = await page.locator('.alert-success')
+    await expect (successMessage).toContainText('You successfully submitted your transaction.')
+
 })
 })

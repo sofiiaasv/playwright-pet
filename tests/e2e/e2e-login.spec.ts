@@ -6,7 +6,7 @@ test.describe( "Login/ Logout flow", ( )=> {
         await page.goto('http://zero.webappsecurity.com/index.html')
 
     })
-    test.skip("Negative scenario", async ({page}) => {
+    test("Negative scenario", async ({page}) => {
         await page.click("#signin_button")
         await page.fill('#user_login', 'invalid user_name')
         await page.fill('#user_password', 'invalid password')
@@ -16,7 +16,7 @@ test.describe( "Login/ Logout flow", ( )=> {
         await expect(errorMessage).toContainText('Login and/or password are wrong')
     })
     //positve scenario + logout 
-    test.skip("Positive scenario for login and logout", async ({page}) => {
+    test("Positive scenario for login and logout", async ({page}) => {
         await page.click("#signin_button")
         await page.fill('#user_login', 'username')
         await page.fill('#user_password', 'password')

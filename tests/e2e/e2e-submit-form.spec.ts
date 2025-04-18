@@ -5,7 +5,7 @@ test.describe('Feedback form', () => {
         await page.goto("http://zero.webappsecurity.com/index.html")
         await page.click('#feedback')
     })
-    test.skip('Reset feedback form', async ({page}) => {
+    test('Reset feedback form', async ({page}) => {
         await page.fill('#name', 'some name')
         await page.fill('#email', 'some email@email.com')
         await page.fill('#subject', 'some subject')
