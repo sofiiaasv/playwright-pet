@@ -1,10 +1,14 @@
 import { test, expect } from '@playwright/test'
+import { LoginPage } from '../../page-objects/LoginPage'
 
-test.describe( "Login/ Logout flow", ( )=> {
+test.describe.only( "Login/ Logout flow", ( )=> {
+    let loginPage: LoginPage
+
     //Before Hook 
     test.beforeEach(async ({page}) => {
-        await page.goto('http://zero.webappsecurity.com/index.html')
-
+       loginPage = new LoginPage(page)
+       //Instead of await page.goto('https://zero.webappsecurity.com/bank/transfer-funds.html') used >>
+        await loginPage.visit()
     })
     test("Negative scenario", async ({page}) => {
         await page.click("#signin_button")
