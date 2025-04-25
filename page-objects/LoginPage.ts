@@ -18,8 +18,18 @@ constructor(page:Page){
     this.errorMessage = page.locator('.alert-error')
 }
 //Define login page methods 
-async visit (){
-    await this.page.goto('http://zero.webappsecurity.com/index.html')
+
+async login(username: string, password:string)
+    {
+        await this.usernameInput.fill(username)
+        await this.passwordInput.fill(password)
+        await this.submitButton.click()
+    }
+    
+async assertErrorMessage(){
+    await expect(this.errorMessage).toContainText(
+        'Login and/or password are wrong'
+    )
 }
 
 }
