@@ -1,6 +1,9 @@
 import {test, expect} from '@playwright/test'
+import { HomePage } from '../../page-objects/HomePage'
+import { LoginPage } from '../../page-objects/LoginPage'
 
 test.describe("New payment", () => {
+    
     test.beforeEach(async ({page}) => {
         await page.goto('http://zero.webappsecurity.com/index.html')
         await page.click('#signin_button')
