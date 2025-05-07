@@ -1,6 +1,7 @@
 import {test, expect} from '@playwright/test'
 import { HomePage } from '../../page-objects/HomePage'
 import { LoginPage } from '../../page-objects/LoginPage'
+import { addAbortListener } from 'events'
 
 test.describe("New payment", () => {
     let homePage: HomePage
@@ -24,5 +25,15 @@ test.describe("New payment", () => {
         await page.click('#pay_bills_tab')
         await page.selectOption("#sp_payee", "apple")
         await page.click("#sp_get_payee_details")
+        await page.selectOption('#sp_account','6')
+        await page.fill('#sp_amount', '5000')
+        await page.fill('#sp_date', '2021-08-09')
+        await page.fill('#sp_description', 'random')
+        await page.click('#pay_saved_payees')
+
+        const message = await page.locator('#alert_content > span')
+        await expect (message).toBeVisible()
+        
+
     })
 })
