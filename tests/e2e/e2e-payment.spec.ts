@@ -1,7 +1,6 @@
 import {test, expect} from '@playwright/test'
 import { HomePage } from '../../page-objects/HomePage'
 import { LoginPage } from '../../page-objects/LoginPage'
-import { addAbortListener } from 'events'
 
 test.describe("New payment", () => {
     let homePage: HomePage
