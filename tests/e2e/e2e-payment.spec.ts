@@ -1,39 +1,43 @@
 import {test, expect} from '@playwright/test'
 import { HomePage } from '../../page-objects/HomePage'
 import { LoginPage } from '../../page-objects/LoginPage'
+import { PaymentPage } from '../../page-objects/PaymentPage'
+import { NavBar } from '../../page-objects/components/NavBar'
 
-test.describe("New payment", () => {
+test.describe.only("New payment", () => {
     let homePage: HomePage
     let loginPage: LoginPage
+    let paymentPage: PaymentPage
+    let navBar: NavBar
 
     test.beforeEach(async ({page}) => {
         homePage = new HomePage(page)
-    loginPage = new LoginPage(page)
+        loginPage = new LoginPage(page)
+        paymentPage = new PaymentPage(page)
+        navBar = new NavBar(page)
 
      await homePage.visit()
      await homePage.clickOnSignIn()
      await loginPage.login('username', 'password')
-        // await page.goto('http://zero.webappsecurity.com/index.html')
-        // await page.click('#signin_button')
-        // await page.fill('#user_login', 'username')
-        // await page.fill('#user_password', 'password')
-        // await page.click("text=Sign in")
     })
 
     test('Should send new payment', async ({page}) =>{
-        //await page.click('#pay_bills_tab')
-        await page.selectOption("#sp_payee", "apple")
-        await page.click("#sp_get_payee_details")
-        await page.waitForSelector("#sp_payee_details")
-        await page.selectOption('#sp_account','6')
-        await page.fill('#sp_amount', '5000')
-        await page.fill('#sp_date', '2021-08-09')
-        await page.fill('#sp_description', 'random')
-        await page.click('#pay_saved_payees')
+        navBar.clickOnTab('Pay Bills')
+        await paymentPage.createPayment()
+        await paymentPage.assertSuccessMessage()
 
-        const message = await page.locator('#alert_content > span')
-        await expect (message).toBeVisible()
-        await expect(message).toContainText('The payment was successfully submitted')
+        // await page.selectOption("#sp_payee", "apple")
+        // await page.click("#sp_get_payee_details")
+        // await page.waitForSelector("#sp_payee_details")
+        // await page.selectOption('#sp_account','6')
+        // await page.fill('#sp_amount', '5000')
+        // await page.fill('#sp_date', '2021-08-09')
+        // await page.fill('#sp_description', 'random')
+        // await page.click('#pay_saved_payees')
+
+        // const message = await page.locator('#alert_content > span')
+        // await expect (message).toBeVisible()
+        // await expect(message).toContainText('The payment was successfully submitted')
 
 
     })
