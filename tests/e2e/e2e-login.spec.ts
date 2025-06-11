@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test'
 import { LoginPage } from '../../page-objects/LoginPage'
 import { HomePage } from '../../page-objects/HomePage'
 
-test.describe( "Login/ Logout flow", ( )=> {
+test.describe.only( "Login/ Logout flow", ( )=> {
     let loginPage: LoginPage
     let homePage: HomePage
 
@@ -19,6 +19,7 @@ test.describe( "Login/ Logout flow", ( )=> {
         //await page.click("#signin_button")
     
         await loginPage.login('nvalid user_name', 'invalid password')
+        await loginPage.wait(3000)
         // await page.fill('#user_login', 'invalid user_name')
         // await page.fill('#user_password', 'invalid password')
         // await page.click("text=Sign in")
