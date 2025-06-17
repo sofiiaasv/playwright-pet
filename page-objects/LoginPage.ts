@@ -1,21 +1,24 @@
-import { expect, Locator, Page} from '@playwright/test'
+import { expect, Locator, Page } from '@playwright/test'
+import { AbstracPage } from './AbstractPage'
 
-export class LoginPage{
+export class LoginPage extends AbstracPage{
     //Define selectors
-    readonly page: Page
+    
     readonly usernameInput: Locator
     readonly passwordInput: Locator
     readonly submitButton: Locator
     readonly errorMessage: Locator
+    readonly loginForm: Locator
 
 
 //Init selectors using constructor
 constructor(page:Page){
-    this.page = page
+    super(page)
     this.usernameInput = page.locator('#user_login')
     this.passwordInput = page.locator('#user_password')
     this.submitButton = page.locator('text=Sign in')
     this.errorMessage = page.locator('.alert-error')
+    this.loginForm = page.locator('#login_form')
 }
 //Define login page methods 
 
@@ -31,6 +34,14 @@ async assertErrorMessage(){
         'Login and/or password are wrong'
     )
 }
+    async snapshotLoginForm() {
+    expect( await this.loginForm.screenshot()).toMatchSnapshot('Login_form.png')
+    
+}
+    async snapshotErrorMessage() {
+        expect (await this.errorMessage.screenshot()).toMatchSnapshot('Login_Error_message.png')
+    }
+    
 
 }
 

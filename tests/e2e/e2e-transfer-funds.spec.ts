@@ -2,7 +2,7 @@ import {test, expect} from '@playwright/test'
 import { HomePage } from '../../page-objects/HomePage'
 import { LoginPage } from '../../page-objects/LoginPage'
 
-test.describe.only('Transfer Funds and make payments', () => {
+test.describe('Transfer Funds and make payments', () => {
     let homePage: HomePage
     let loginPage: LoginPage
 
